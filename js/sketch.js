@@ -54,7 +54,7 @@ function messageToDiscord(data) {
 
 // receives messages from Discord, and passes it to Arduino
 ipcRenderer.on("fromDiscordBot", (event, message) => {
-  console.log(message);
+  console.log(message); // prints message so we can see it
 
   sendToArduino(message);
 });
@@ -66,7 +66,7 @@ ipcRenderer.on("thumbsup", (event, message) => {
   sendToArduino('H');
 });
 
-// receives thumbsup from Discord, and passes it to Arduino
+// receives thumbsdown from Discord, and passes it to Arduino
 ipcRenderer.on("thumbsdown", (event, message) => {
   //console.log(message);
 
