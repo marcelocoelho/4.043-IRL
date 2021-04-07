@@ -1,7 +1,7 @@
 const { Client, MessageEmbed } = require("discord.js");
 const { Notification, ipcMain } = require("electron");
 
-const TOKEN = "ODI4MDkwNzQxNDQzOTE5ODcz.YGkhmQ.1O2nyqIK6MutEiTtJyAtp7dEiSA";
+const TOKEN = "_____";
 const CHANNELID = "828104123655651371";
 
 
@@ -20,6 +20,7 @@ class DiscordBot {
     console.log("Discord bot ready!");
   }
 
+
   showNotification(message = "Notification from the Main process") {
     const notification = {
       title: "Basic Notification",
@@ -36,9 +37,12 @@ class DiscordBot {
 
   }
 
+  // This is mostly likely the only function you will need to edit in this file. 
+  // It gets data from Discord server and decides what to do with it. 
   onMessage(message) {
     
-    // when discordbot receives a message it calls this in p5
+
+    // when discordbot receives a message it calls the fromDiscordBot function in p5 and relays the message to p5
     this.win.webContents.send("fromDiscordBot", message.content);
     
     // if discordbot receives 'hey' from discord, it replies with 'ho'
@@ -47,6 +51,8 @@ class DiscordBot {
       message.reply("ho");
     }
 
+    // This block of code listen for a thumbs up emoji in Discord. 
+    // When it sees it, it calls the thumbsup function in p5
     if (message.content.includes("👍")) {
       //this.showNotification("Like from discord");
       const thumbsup = message.content.split("👍");
@@ -54,6 +60,7 @@ class DiscordBot {
       this.win.webContents.send("thumbsup", count - 1);
     }
 
+    // This is similar to previous block, but it listens to thumbs down
     if (message.content.includes("👎")) {
       //this.showNotification("Like from discord");
       const thumbsdown = message.content.split("👎");

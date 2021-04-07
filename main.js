@@ -15,7 +15,7 @@ function createWindow() {
   win.loadFile("index.html");
   win.webContents.openDevTools();   // opens the javascript console automatically for debugging
   //win.setFullScreen(true);
-  // win.maximize();
+  //win.maximize();
 }
 
 function initBot() {
